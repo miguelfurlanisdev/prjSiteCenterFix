@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <!-- 
+    ======================================================================
+    1. CONFIGURAÇÕES BÁSICAS E SEO (HEAD)
+    ======================================================================
+    Informações para o navegador e buscadores.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENTER FIX | Autopeças & Serviços Automotivos em Sorocaba</title>
+    <meta name="description" content="Center Fix - Oficina e loja de autopeças no Jardim Leocadia, Sorocaba/SP. Peças novas, manutenção e atendimento próximo com 11 anos de tradição.">
+    
+    <!-- 
+    ======================================================================
+    CARREGAMENTO DE BIBLIOTECAS DE ESTILO E FONTES
+    - Tailwind CSS CDN: Framework para estilização ágil
+    - Google Fonts: Fontes 'Inter' e 'Outfit' para tipografia moderna
+    - Font Awesome: Ícones vetoriais de carros, ferramentas e WhatsApp
+    ======================================================================
+    -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configurações personalizadas de cores da marca Center Fix para o Tailwind CSS
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0c',       // Fundo escuro principal
+                            card: '#121216',       // Fundo dos cards e contêineres
+                            border: '#262630',     // Cor das bordas
+                            red: '#e62429',        // Vermelho principal da marca
+                            redHover: '#cc1a1f',   // Vermelho para hover de botões
+                            orange: '#ff5500',     // Laranja de destaque da marca
+                            glow: 'rgba(230, 36, 41, 0.25)' // Brilho suave
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 
+    ======================================================================
+    2. ESTILOS CSS PERSONALIZADOS DA CENTER FIX
+    ======================================================================
+    Aqui ficam os efeitos visuais, barras de rolagem, degradês,
+    brilhos e animações de entrada dos elementos na tela.
+    -->
+    <style>
+        /* Estilização da barra de rolagem lateral */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262630;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e62429;
+        }
+
+        /* Efeito de vidro fosco no cabeçalho superior */
+        .glass-nav {
+            background: rgba(10, 10, 12, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        /* Fundo radial com iluminação vermelha e laranja */
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 20%, rgba(230, 36, 41, 0.16) 0%, rgba(255, 85, 0, 0.05) 45%, rgba(10, 10, 12, 1) 85%);
+        }
+
+        /* Animação e brilho ao passar o mouse sobre os cards */
+        .card-glow {
+            transition: all 0.3s ease;
+        }
+        .card-glow:hover {
+            border-color: rgba(230, 36, 41, 0.6);
+            box-shadow: 0 10px 30px -10px rgba(230, 36, 41, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Padrão em grade no fundo da tela principal */
+        .grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Animação de revelação suave ao rolar a página (Scroll Reveal) */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pulsação sutil nos botões de destaque (CTA WhatsApp) */
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.6); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px 5px rgba(230, 36, 41, 0.3); }
+        }
+
+        .btn-pulse {
+            animation: subtlePulse 3s infinite ease-in-out;
+        }
+
+        /* Textura de malha de fibra de carbono em CSS */
+        .carbon-mesh {
+            background-color: #0c0c10;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.08) 15%, transparent 16%),
+                radial-gradient(rgba(255, 85, 0, 0.05) 15%, transparent 16%);
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white">
+
+    <!-- 
+    ======================================================================
+    3. CABEÇALHO E MENU DE NAVEGAÇÃO
+    ======================================================================
+    Contém a logo vetorial oficial da Center Fix, os links das seções
+    e o botão de orçamento rápido para telemóvel e desktop.
+    -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-border/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo Oficial da Center Fix em Vetor (SVG) -->
+                <a href="#" class="flex items-center group transition-transform hover:scale-105" aria-label="Center Fix Início">
+                    <svg viewBox="0 0 330 70" class="h-10 sm:h-12 w-auto" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="50%" stop-color="#e2e8f0"/>
+                                <stop offset="100%" stop-color="#94a3b8"/>
+                            </linearGradient>
+                            <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff7700"/>
+                                <stop offset="50%" stop-color="#ff5500"/>
+                                <stop offset="100%" stop-color="#e62429"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Emblema Oval com Sigla CF -->
+                        <g transform="translate(5, 5)">
+                            <ellipse cx="32" cy="30" rx="30" ry="20" fill="none" stroke="url(#silverGrad)" stroke-width="4.5" />
+                            <ellipse cx="32" cy="30" rx="23" ry="14" fill="url(#orangeGrad)" />
+                            <path d="M 21,33 C 19,25 25,21 31,21 C 35,21 38,23 39,25 L 34,28 C 33,27 32,26 30,26 C 27,26 24,29 25,32 C 26,35 29,36 31,36 C 33,36 35,35 36,33 L 41,36 C 39,39 35,41 30,41 C 23,41 19,37 21,33 Z" fill="#0a0a0c"/>
+                            <path d="M 33,22 L 44,22 L 42,26 L 37,26 L 36,29 L 42,29 L 40,33 L 35,33 L 33,39 L 29,39 Z" fill="#0a0a0c"/>
+                        </g>
+
+                        <!-- Nome da Empresa -->
+                        <text x="75" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#silverGrad)" letter-spacing="1">CENTER</text>
+                        <text x="202" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#orangeGrad)" letter-spacing="0.5">FIX</text>
+                        <text x="77" y="55" font-family="'Inter', sans-serif" font-weight="800" font-size="8.5" fill="#ffffff" letter-spacing="2.8">SERVIÇOS AUTOMOTIVOS</text>
+                    </svg>
+                </a>
+
+                <!-- Links de Navegação (Desktop) -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#inicio" class="text-gray-300 hover:text-brand-red transition-colors">Início</a>
+                    <a href="#autopecas" class="text-gray-300 hover:text-brand-orange transition-colors">Autopeças</a>
+                    <a href="#servicos" class="text-gray-300 hover:text-brand-red transition-colors">Serviços</a>
+                    <a href="#orcamento" class="text-gray-300 hover:text-brand-orange transition-colors">Orçamento</a>
+                    <a href="#diferenciais" class="text-gray-300 hover:text-brand-red transition-colors">Diferenciais</a>
+                    <a href="#localizacao" class="text-gray-300 hover:text-brand-red transition-colors">Localização</a>
+                </nav>
+
+                <!-- Botão de Orçamento no Cabeçalho (Desktop) -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="#orcamento" class="bg-gradient-to-r from-brand-red to-brand-orange hover:from-brand-redHover hover:to-brand-red text-white text-sm font-bold py-2.5 px-5 rounded-lg shadow-lg shadow-brand-red/20 hover:shadow-brand-red/40 transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>ORÇAMENTO RÁPIDO</span>
+                    </a>
+                </div>
+
+                <!-- Botão de Abrir Menu em Celulares e Tablets -->
+                <button id="mobile-menu-btn" type="button" class="md:hidden p-2.5 text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition-colors" aria-label="Abrir menu">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Suspenso para Dispositivos Móveis (Celular) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-card/95 border-b border-brand-border backdrop-blur-xl transition-all">
+            <div class="px-4 pt-3 pb-6 space-y-3 font-medium">
+                <a href="#inicio" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-red text-gray-200">Início</a>
+                <a href="#autopecas" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-orange text-gray-200">Autopeças & Acessórios</a>
+                <a href="#servicos" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-red text-gray-200">Serviços Automotivos</a>
+                <a href="#orcamento" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-orange text-gray-200">Solicitar Orçamento</a>
+                <a href="#diferenciais" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-red text-gray-200">Diferenciais</a>
+                <a href="#localizacao" class="mobile-nav-link block py-2 px-3 rounded-md hover:bg-white/5 hover:text-brand-red text-gray-200">Endereço & Contato</a>
+                <div class="pt-2">
+                    <a href="#orcamento" class="w-full bg-brand-red hover:bg-brand-redHover text-white text-center font-bold py-3 rounded-lg flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>SOLICITAR ORÇAMENTO</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 
+    ======================================================================
+    4. SEÇÃO PRINCIPAL (HERO) - APRESENTAÇÃO
+    ======================================================================
+    Primeira impressão do site: título de impacto, slogan da empresa,
+    destaques de anos de tradição em Sorocaba e o Card Institucional.
+    -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden hero-gradient grid-pattern">
+        
+        <!-- Efeitos de iluminação de fundo -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-red/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[300px] h-[300px] bg-brand-orange/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Lado Esquerdo: Textos de Impacto e Chamadas para Ação -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-on-scroll">
+                    
+                    <!-- Badge de Localização -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/30 text-brand-red text-xs font-bold tracking-widest uppercase">
+                        <span class="w-2 h-2 rounded-full bg-brand-red animate-ping"></span>
+                        Empresa Local em Sorocaba • Jardim Leocadia
+                    </div>
+
+                    <!-- Título Principal da Marca -->
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight uppercase tracking-tight">
+                        CENTER <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-brand-orange to-white">FIX</span>
+                    </h1>
+
+                    <!-- Slogan Oficial -->
+                    <p class="text-xl sm:text-2xl font-light text-gray-300 max-w-2xl mx-auto lg:mx-0">
+                        O seu carro merece o cuidado de quem entende.
+                    </p>
+
+                    <!-- Descrição da Empresa -->
+                    <p class="text-sm sm:text-base text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Sua parceira de confiança no Jardim Leocadia em Sorocaba/SP. Venda de autopeças novas e manutenção automotiva com atendimento próximo, transparente e responsável.
+                    </p>
+
+                    <!-- Botões Principais de Conversão -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#orcamento" class="w-full sm:w-auto bg-gradient-to-r from-brand-red to-brand-orange hover:from-brand-redHover hover:to-brand-red text-white font-bold py-4 px-8 rounded-xl shadow-xl shadow-brand-red/30 hover:scale-105 transition-all flex items-center justify-center gap-3 text-base btn-pulse">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span>SOLICITAR ORÇAMENTO</span>
+                        </a>
+                        
+                        <a href="#autopecas" class="w-full sm:w-auto bg-brand-card hover:bg-brand-border border border-brand-border hover:border-gray-500 text-white font-semibold py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 text-base">
+                            <span>VER PEÇAS E SERVIÇOS</span>
+                            <i class="fa-solid fa-arrow-down text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Números e Tradição (Métricas) -->
+                    <div class="pt-8 border-t border-brand-border/60 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <span class="block font-display font-black text-2xl sm:text-3xl text-white">+11 Anos</span>
+                            <span class="text-xs text-gray-400">Tradição e Confiança</span>
+                        </div>
+                        <div>
+                            <span class="block font-display font-black text-2xl sm:text-3xl text-brand-red">Sorocaba</span>
+                            <span class="text-xs text-gray-400">Jardim Leocadia</span>
+                        </div>
+                        <div>
+                            <span class="block font-display font-black text-2xl sm:text-3xl text-brand-orange">5.0 ★</span>
+                            <span class="text-xs text-gray-400">Avaliação dos Clientes</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Lado Direito: Card Gráfico Institucional (Sem fotos genéricas) -->
+                <div class="lg:col-span-5 relative reveal-on-scroll">
+                    <div class="relative mx-auto max-w-md lg:max-w-none rounded-2xl overflow-hidden border border-brand-border/80 shadow-2xl bg-brand-card">
+                        
+                        <!-- Topo com malha de carbono e Logo grande -->
+                        <div class="carbon-mesh p-8 border-b border-brand-border/60 flex items-center justify-center">
+                            <svg viewBox="0 0 330 70" class="h-16 sm:h-20 w-auto drop-shadow-lg" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="translate(5, 5)">
+                                    <ellipse cx="32" cy="30" rx="30" ry="20" fill="none" stroke="url(#silverGrad)" stroke-width="4.5" />
+                                    <ellipse cx="32" cy="30" rx="23" ry="14" fill="url(#orangeGrad)" />
+                                    <path d="M 21,33 C 19,25 25,21 31,21 C 35,21 38,23 39,25 L 34,28 C 33,27 32,26 30,26 C 27,26 24,29 25,32 C 26,35 29,36 31,36 C 33,36 35,35 36,33 L 41,36 C 39,39 35,41 30,41 C 23,41 19,37 21,33 Z" fill="#0a0a0c"/>
+                                    <path d="M 33,22 L 44,22 L 42,26 L 37,26 L 36,29 L 42,29 L 40,33 L 35,33 L 33,39 L 29,39 Z" fill="#0a0a0c"/>
+                                </g>
+                                <text x="75" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#silverGrad)" letter-spacing="1">CENTER</text>
+                                <text x="202" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#orangeGrad)" letter-spacing="0.5">FIX</text>
+                                <text x="77" y="55" font-family="'Inter', sans-serif" font-weight="800" font-size="8.5" fill="#ffffff" letter-spacing="2.8">SERVIÇOS AUTOMOTIVOS</text>
+                            </svg>
+                        </div>
+
+                        <!-- Lista de Pilares do Card -->
+                        <div class="p-8 space-y-6 bg-gradient-to-b from-brand-card via-black/40 to-brand-card">
+                            
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-brand-border/40 border border-brand-border">
+                                <div class="w-12 h-12 rounded-xl bg-brand-red/20 text-brand-red flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-boxes-packing"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-sm">Autopeças e Acessórios Novos</h4>
+                                    <p class="text-gray-400 text-xs">Latarias, parachoques e componentes de reposição.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-brand-border/40 border border-brand-border">
+                                <div class="w-12 h-12 rounded-xl bg-brand-orange/20 text-brand-orange flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-wrench"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-sm">Atendimento Personalizado</h4>
+                                    <p class="text-gray-400 text-xs">Orientação clara para o que seu veículo realmente precisa.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-brand-border/40 border border-brand-border">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-sm">Empresa Próxima e Transparente</h4>
+                                    <p class="text-gray-400 text-xs">Atendendo Sorocaba e região com honestidade.</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 text-center border-t border-brand-border/60">
+                                <p class="text-xs text-gray-400">
+                                    <i class="fa-solid fa-location-dot text-brand-red mr-1"></i> Rua Itapeva, 67 - Jardim Leocadia, Sorocaba/SP
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    5. SEÇÃO DE AUTOPEÇAS E ACESSÓRIOS NOVOS
+    ======================================================================
+    Apresentação da comercialização de componentes novos e latarias.
+    -->
+    <section id="autopecas" class="py-16 bg-gradient-to-b from-brand-card to-brand-dark border-t border-brand-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-brand-card via-black to-brand-card border border-brand-orange/30 rounded-3xl p-8 sm:p-12 shadow-2xl reveal-on-scroll relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold uppercase tracking-wider">
+                            <i class="fa-solid fa-box-open"></i> Comercialização de Autopeças Novas
+                        </div>
+                        <h3 class="font-display text-2xl sm:text-4xl font-extrabold text-white">
+                            PEÇAS & ACESSÓRIOS AUTOMOTIVOS NOVOS
+                        </h3>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Trabalhamos com fornecimento de peças novas de reposição, componentes de lataria, parachoques, retrovisores, faróis e acessórios para carros de passeio e utilitários.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-300 pt-2">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-orange"></i> Peças de lataria e acabamento externo</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-orange"></i> Faróis, lanternas e retrovisores</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-orange"></i> Componentes novos com procedência</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-orange"></i> Atendimento ágil e consultivo no WhatsApp</div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                        <a href="#orcamento" class="bg-brand-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-center flex items-center justify-center gap-3 w-full sm:w-auto">
+                            <i class="fa-brands fa-whatsapp text-xl"></i>
+                            <span>CONSULTAR DISPONIBILIDADE</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    6. SEÇÃO DE SERVIÇOS DA CENTER FIX
+    ======================================================================
+    Aqui ficam os cards dos serviços confirmados.
+    Para adicionar, remover ou alterar um serviço, modifique os cards abaixo.
+    -->
+    <section id="servicos" class="py-20 bg-brand-dark border-t border-brand-border/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Título da Seção -->
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-brand-orange text-xs font-bold uppercase tracking-widest">Nossos Serviços</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mt-2">
+                    SERVIÇO DE <span class="text-brand-red">ALTA PERFORMANCE</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-red to-brand-orange mx-auto mt-4 rounded-full"></div>
+                <p class="text-gray-400 mt-4 text-base">
+                    Equipamentos modernos e profissionais qualificados para atender seu veículo com eficiência, segurança e preço justo.
+                </p>
+            </div>
+
+            <!-- Grid com os Cards de Serviços -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- CARD DE SERVIÇO 1: Venda de Autopeças -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 card-glow reveal-on-scroll flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-red/20 to-brand-orange/10 border border-brand-red/30 text-brand-red flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-boxes-packing"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Venda de Autopeças Novas</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Fornecimento de componentes de reposição novos, latarias, parachoques e acessórios para diversas marcas e modelos.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Componentes novos de qualidade</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Peças de lataria e acabamentos</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Orientação para o item correto</li>
+                        </ul>
+                    </div>
+                    <a href="#orcamento" class="w-full py-3 px-4 rounded-lg bg-brand-border hover:bg-brand-red text-white text-xs font-bold transition-all text-center flex items-center justify-center gap-2">
+                        <span>CONSULTAR PEÇAS</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- CARD DE SERVIÇO 2: Substituição e Montagem -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 card-glow reveal-on-scroll flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-red/20 to-brand-orange/10 border border-brand-red/30 text-brand-orange flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Substituição & Montagem</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Instalação e montagem cuidadosa de parachoques, retrovisores, faróis, lanternas e portas com encaixe preciso.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Ajuste e alinhamento de peças</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Troca de conjuntos ópticos e retrovisores</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-orange"></i> Montagem limpa e segura</li>
+                        </ul>
+                    </div>
+                    <a href="#orcamento" class="w-full py-3 px-4 rounded-lg bg-brand-border hover:bg-brand-orange text-white text-xs font-bold transition-all text-center flex items-center justify-center gap-2">
+                        <span>ORÇAR MONTAGEM</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- CARD DE SERVIÇO 3: Reparo de Lataria e Parachoques -->
+                <div class="bg-brand-card border border-brand-border rounded-2xl p-8 card-glow reveal-on-scroll flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-red/20 to-brand-orange/10 border border-brand-red/30 text-brand-red flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-car-burst"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Reparo de Lataria e Parachoques</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Recuperação de pequenas avarias, desalinhamentos leves e restauração de parachoques plásticos trincados.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Recuperação de encaixes</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Solda em plásticos e polímeros</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-red"></i> Soluções econômicas e duráveis</li>
+                        </ul>
+                    </div>
+                    <a href="#orcamento" class="w-full py-3 px-4 rounded-lg bg-brand-border hover:bg-brand-red text-white text-xs font-bold transition-all text-center flex items-center justify-center gap-2">
+                        <span>ORÇAR REPARO</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    7. FORMULÁRIO DE SOLICITAÇÃO DE ORÇAMENTO
+    ======================================================================
+    Permite ao cliente preencher Nome, Veículo, Serviço, Urgência e Anexar Foto,
+    enviando a mensagem formatada em 1 clique para o WhatsApp da empresa.
+    -->
+    <section id="orcamento" class="py-16 bg-gradient-to-r from-brand-card via-black to-brand-card border-y border-brand-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-dark border border-brand-red/40 rounded-3xl p-6 sm:p-10 shadow-2xl reveal-on-scroll relative overflow-hidden">
+                
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-red/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <span class="text-brand-orange text-xs font-bold uppercase tracking-widest">Atendimento Direto & Rápido</span>
+                    <h3 class="font-display text-2xl sm:text-4xl font-extrabold text-white mt-1">
+                        SOLICITE SEU <span class="text-brand-red">ORÇAMENTO</span>
+                    </h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mt-2">
+                        Preencha os dados abaixo e envie diretamente para nosso WhatsApp com um único clique.
+                    </p>
+                </div>
+
+                <!-- Formulário com integração para o JavaScript -->
+                <form id="quote-form" onsubmit="sendWhatsAppQuote(event)" class="space-y-5">
+                    
+                    <!-- Campo 1: Nome do Cliente e Modelo do Veículo -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-2">Seu Nome *</label>
+                            <input type="text" id="quote-name" required placeholder="Ex: Miguel Silva" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-2">Modelo do Veículo *</label>
+                            <input type="text" id="quote-car" required placeholder="Ex: Honda Civic 2018" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Campo 2: Serviço Desejado e Nível de Urgência -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-2">Serviço ou Peça Desejada *</label>
+                            <input type="text" id="quote-service" required placeholder="Ex: Parachoque dianteiro / Manutenção" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-2">Urgência do Atendimento *</label>
+                            <select id="quote-urgency" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-red transition-colors text-sm">
+                                <option value="🔴 Urgente / preciso do carro">Urgente / preciso do carro</option>
+                                <option value="🟡 Preciso resolver em breve">Preciso resolver em breve</option>
+                                <option value="🟢 Manutenção normal">Manutenção normal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Campo 3: Descrição do Problema -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase mb-2">Descrição do Problema ou Necessidade</label>
+                        <textarea id="quote-desc" rows="3" placeholder="Descreva o que seu carro precisa ou qual peça está procurando..." class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors text-sm resize-none"></textarea>
+                    </div>
+
+                    <!-- Campo 4: Seleção de Foto do Celular / Computador -->
+                    <div class="p-4 rounded-xl bg-brand-card border border-brand-border space-y-2">
+                        <label class="block text-xs font-bold text-gray-300 uppercase flex items-center justify-between">
+                            <span><i class="fa-solid fa-camera text-brand-orange mr-1.5"></i> Selecionar Foto do Veículo ou Problema (Opcional)</span>
+                            <span class="text-[10px] text-gray-400 font-normal">Celular ou Computador</span>
+                        </label>
+                        
+                        <div class="flex items-center gap-3">
+                            <input type="file" id="quote-photo" accept="image/*" class="hidden" onchange="handlePhotoSelection(this)">
+                            <button type="button" onclick="document.getElementById('quote-photo').click()" class="bg-brand-border hover:bg-gray-700 text-gray-200 text-xs font-bold py-2.5 px-4 rounded-lg border border-gray-600 transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-paperclip"></i>
+                                <span id="photo-btn-text">Escolher Foto</span>
+                            </button>
+                            <span id="photo-filename" class="text-xs text-gray-400 truncate max-w-xs">Nenhuma foto selecionada</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400">
+                            A foto selecionada ajudará no atendimento. Ao abrir o WhatsApp, basta enviá-la na conversa.
+                        </p>
+                    </div>
+
+                    <!-- Botão Final de Disparo para o WhatsApp -->
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-red to-brand-orange hover:from-brand-redHover hover:to-brand-red text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-red/30 transition-all flex items-center justify-center gap-3 text-base btn-pulse">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>ENVIAR PELO WHATSAPP</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    8. SEÇÃO PADRÃO DE EXCELÊNCIA (DIFERENCIAIS)
+    ======================================================================
+    Diferenciais da empresa: Atendimento Profissional, Tecnologia e Compromisso.
+    -->
+    <section id="diferenciais" class="py-20 bg-brand-dark border-t border-brand-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-on-scroll">
+                <span class="text-brand-orange text-xs font-bold uppercase tracking-widest">Nossos Valores</span>
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mt-2">
+                    PADRÃO DE <span class="text-brand-red">EXCELÊNCIA</span>
+                </h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-red to-brand-orange mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Diferencial 1 -->
+                <div class="bg-brand-card/80 border border-brand-border rounded-2xl p-8 text-center reveal-on-scroll hover:border-brand-red transition-colors">
+                    <div class="w-16 h-16 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center text-2xl mx-auto mb-4 border border-brand-red/30">
+                        <i class="fa-solid fa-users font-black"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Atendimento Profissional</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Atendimento próximo, claro e responsável. Explicamos cada detalhe com total transparência para que você se sinta seguro.
+                    </p>
+                </div>
+
+                <!-- Diferencial 2 -->
+                <div class="bg-brand-card/80 border border-brand-border rounded-2xl p-6 md:p-8 text-center reveal-on-scroll hover:border-brand-orange transition-colors">
+                    <div class="w-16 h-16 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center text-2xl mx-auto mb-4 border border-brand-orange/30">
+                        <i class="fa-solid fa-microchip font-black"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Tecnologia de Ponta</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Utilização de tecnologia e equipamentos adequados para garantir diagnósticos precisos e serviços de alta durabilidade.
+                    </p>
+                </div>
+
+                <!-- Diferencial 3 -->
+                <div class="bg-brand-card/80 border border-brand-border rounded-2xl p-8 text-center reveal-on-scroll hover:border-brand-red transition-colors">
+                    <div class="w-16 h-16 rounded-full bg-brand-red/10 text-brand-red flex items-center justify-center text-2xl mx-auto mb-4 border border-brand-red/30">
+                        <i class="fa-solid fa-handshake font-black"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Compromisso com o Cliente</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Foco em confiança, transparência e qualidade. O compromisso de uma empresa de bairro que respeita sua história em Sorocaba.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    9. LOCALIZAÇÃO, CONTATO E GOOGLE MAPS
+    ======================================================================
+    Informa Endereço, Horário de Funcionamento, Telefones e exibe o Google Maps.
+    -->
+    <section id="localizacao" class="py-20 bg-brand-dark border-t border-brand-border/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Coluna de Informações de Contato -->
+                <div class="lg:col-span-5 space-y-8 reveal-on-scroll">
+                    <div>
+                        <span class="text-brand-red text-xs font-bold uppercase tracking-widest">Venha nos Visitar em Sorocaba</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white mt-1">
+                            LOCALIZAÇÃO & <span class="text-brand-orange">CONTATO</span>
+                        </h2>
+                        <p class="text-gray-400 text-sm mt-3">
+                            Estamos situados no Jardim Leocadia. Venha nos fazer uma visita ou entre em contato direto pelo telefone e WhatsApp.
+                        </p>
+                    </div>
+
+                    <div class="space-y-6">
+                        
+                        <!-- Bloco Endereço -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-card border border-brand-border">
+                            <div class="w-12 h-12 rounded-lg bg-brand-red/20 text-brand-red flex items-center justify-center text-xl shrink-0 mt-1">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Endereço</h4>
+                                <p id="company-address" class="text-gray-300 text-xs mt-1 leading-relaxed">
+                                    Rua Itapeva, 67 - Jardim Leocadia, Sorocaba - SP, CEP 18085-360
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Bloco Horário de Funcionamento -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-card border border-brand-border">
+                            <div class="w-12 h-12 rounded-lg bg-brand-orange/20 text-brand-orange flex items-center justify-center text-xl shrink-0 mt-1">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Horário de Funcionamento</h4>
+                                <p id="company-hours" class="text-gray-300 text-xs mt-1 leading-relaxed">
+                                    Segunda a Sexta: 08:00 às 18:00<br>
+                                    Sábado e Domingo: Fechado
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Bloco Telefone & WhatsApp -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-brand-card border border-brand-border">
+                            <div class="w-12 h-12 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0 mt-1">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">Telefone & WhatsApp</h4>
+                                <p id="company-phone" class="text-gray-300 text-xs mt-1">
+                                    (15) 3346-5300 | WhatsApp: (15) 99621-2944
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Botão de Ação Direta para o WhatsApp -->
+                    <div>
+                        <a href="https://wa.me/5515996212944?text=Ol%C3%A1,%20Center%20Fix!%20Gostaria%20de%20falar%20com%20voc%C3%AAs." target="_blank" rel="noopener" class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-3 text-base">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>FALAR NO WHATSAPP AGORA</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Mapa do Google Maps Incorporado -->
+                <div class="lg:col-span-7 reveal-on-scroll">
+                    <div class="rounded-3xl overflow-hidden border border-brand-border shadow-2xl h-[380px] sm:h-[450px] relative bg-brand-card">
+                        <iframe 
+                            title="Localização Center Fix - Rua Itapeva, 67 - Sorocaba" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.182375936306!2d-47.44186592383561!3d-23.490008578848416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c58a461400bd39%3A0x460cb555f648e073!2sCenter%20Fix%20Servi%C3%A7os%20Automotivos!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+                            class="w-full h-full border-0 grayscale contrast-125 opacity-85 hover:grayscale-0 hover:opacity-100 transition-all duration-500" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                        
+                        <div class="absolute bottom-4 right-4">
+                            <a href="https://maps.google.com/?cid=5047509707137802355" target="_blank" rel="noopener" class="bg-black/90 hover:bg-black text-white text-xs font-bold py-2 px-4 rounded-lg border border-white/20 shadow-lg flex items-center gap-2">
+                                <i class="fa-solid fa-diamond-turn-right text-brand-orange"></i>
+                                <span>ABRIR NO GOOGLE MAPS</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 
+    ======================================================================
+    10. RODAPÉ INSTITUCIONAL (FOOTER)
+    ======================================================================
+    -->
+    <footer class="bg-black border-t border-brand-border/60 py-12 text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <a href="#" class="flex items-center group">
+                    <svg viewBox="0 0 330 70" class="h-10 w-auto" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(5, 5)">
+                            <ellipse cx="32" cy="30" rx="30" ry="20" fill="none" stroke="url(#silverGrad)" stroke-width="4.5" />
+                            <ellipse cx="32" cy="30" rx="23" ry="14" fill="url(#orangeGrad)" />
+                            <path d="M 21,33 C 19,25 25,21 31,21 C 35,21 38,23 39,25 L 34,28 C 33,27 32,26 30,26 C 27,26 24,29 25,32 C 26,35 29,36 31,36 C 33,36 35,35 36,33 L 41,36 C 39,39 35,41 30,41 C 23,41 19,37 21,33 Z" fill="#0a0a0c"/>
+                            <path d="M 33,22 L 44,22 L 42,26 L 37,26 L 36,29 L 42,29 L 40,33 L 35,33 L 33,39 L 29,39 Z" fill="#0a0a0c"/>
+                        </g>
+                        <text x="75" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#silverGrad)" letter-spacing="1">CENTER</text>
+                        <text x="202" y="38" font-family="'Outfit', 'Inter', sans-serif" font-weight="900" font-size="28" fill="url(#orangeGrad)" letter-spacing="0.5">FIX</text>
+                        <text x="77" y="55" font-family="'Inter', sans-serif" font-weight="800" font-size="8.5" fill="#ffffff" letter-spacing="2.8">SERVIÇOS AUTOMOTIVOS</text>
+                    </svg>
+                </a>
+
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#inicio" class="hover:text-white transition-colors">Início</a>
+                    <a href="#autopecas" class="hover:text-white transition-colors">Autopeças</a>
+                    <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
+                    <a href="#orcamento" class="hover:text-white transition-colors">Orçamento</a>
+                    <a href="#diferenciais" class="hover:text-white transition-colors">Diferenciais</a>
+                    <a href="#localizacao" class="hover:text-white transition-colors">Contato</a>
+                </div>
+
+                <p class="text-center md:text-right text-gray-500">
+                    &copy; 2026 Center Fix Serviços Automotivos.<br>
+                    Rua Itapeva, 67 - Jardim Leocadia, Sorocaba/SP. 11 Anos de Tradição.
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+    ======================================================================
+    11. BOTÃO FLUTUANTE DE WHATSAPP (FIXO NA TELA)
+    ======================================================================
+    Permanece acessível durante toda a navegação do usuário na página.
+    -->
+    <a href="https://wa.me/5515996212944?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20meu%20ve%C3%ADculo." 
+       target="_blank" 
+       rel="noopener" 
+       aria-label="Atendimento por WhatsApp"
+       class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/50 hover:scale-110 active:scale-95 transition-all group">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-30 pointer-events-none"></span>
+        <span class="absolute right-16 top-1/2 -translate-y-1/2 bg-black/90 text-white text-xs font-bold py-1.5 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10 shadow-lg">
+            Fale conosco no WhatsApp
+        </span>
+    </a>
+
+    <!-- 
+    ======================================================================
+    12. LÓGICA E SCRIPTS JAVASCRIPT
+    ======================================================================
+    -->
+    <script>
+        /* ======================================================================
+           DADOS DA EMPRESA E CONFIGURAÇÕES DO WHATSAPP
+           Para alterar telefone, endereço, horário ou número do WhatsApp,
+           modifique apenas os valores dentro deste objeto 'CONFIG'.
+           ====================================================================== */
+        const CONFIG = {
+            whatsappNumber: '5515996212944', // Formato: código do país + DDD + número (ex: 5515996212944)
+            companyName: 'Center Fix Serviços Automotivos',
+            address: 'Rua Itapeva, 67 - Jardim Leocadia, Sorocaba - SP, CEP 18085-360',
+            phone: '(15) 3346-5300 | WhatsApp: (15) 99621-2944',
+            hours: 'Segunda a Sexta: 08:00 às 18:00 | Sábado e Domingo: Fechado'
+        };
+
+        // Variável global para armazenar o nome da foto selecionada no formulário
+        let selectedPhotoName = '';
+
+        /* ======================================================================
+           INICIALIZAÇÃO DO SITE QUANDO A PÁGINA É CARREGADA
+           ====================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            initMobileMenu();     // Ativa o menu suspenso para telemóveis
+            initScrollReveal();   // Ativa o aparecimento suave das seções ao rolar a página
+            applyEditableConfig();// Aplica os dados do objeto CONFIG nos elementos HTML
+        });
+
+        /* ======================================================================
+           FUNÇÃO: DADOS DINÂMICOS DA EMPRESA
+           Atualiza os textos de endereço, telefone e horário no HTML.
+           ====================================================================== */
+        function applyEditableConfig() {
+            const addrEl = document.getElementById('company-address');
+            const hoursEl = document.getElementById('company-hours');
+            const phoneEl = document.getElementById('company-phone');
+
+            if(addrEl) addrEl.textContent = CONFIG.address;
+            if(hoursEl) hoursEl.innerHTML = CONFIG.hours.replace('|', '<br>');
+            if(phoneEl) phoneEl.textContent = CONFIG.phone;
+        }
+
+        /* ======================================================================
+           FUNÇÃO: MENU MOBILE
+           Controla a abertura e o fechamento do menu suspenso nos telemóveis.
+           ====================================================================== */
+        function initMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            const links = document.querySelectorAll('.mobile-nav-link');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                if(menu.classList.contains('hidden')) {
+                    icon.className = 'fa-solid fa-bars text-2xl';
+                } else {
+                    icon.className = 'fa-solid fa-xmark text-2xl';
+                }
+            });
+
+            // Fecha o menu automaticamente quando o usuário clica em um link
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    icon.className = 'fa-solid fa-bars text-2xl';
+                });
+            });
+        }
+
+        /* ======================================================================
+           FUNÇÃO: ANIMAÇÃO DE REVELAÇÃO AO ROLAR (SCROLL REVEAL)
+           Exibe suavemente os blocos da página conforme são visualizados.
+           ====================================================================== */
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        }
+
+        /* ======================================================================
+           FUNÇÃO: SELEÇÃO DE FOTO DO VEÍCULO
+           Mostra o nome do ficheiro selecionado pelo usuário no formulário.
+           ====================================================================== */
+        function handlePhotoSelection(input) {
+            const filenameEl = document.getElementById('photo-filename');
+            const btnTextEl = document.getElementById('photo-btn-text');
+
+            if (input.files && input.files.length > 0) {
+                selectedPhotoName = input.files[0].name;
+                filenameEl.textContent = `📷 ${selectedPhotoName}`;
+                filenameEl.classList.remove('text-gray-400');
+                filenameEl.classList.add('text-emerald-400', 'font-bold');
+                btnTextEl.textContent = 'Trocar Foto';
+            } else {
+                selectedPhotoName = '';
+                filenameEl.textContent = 'Nenhuma foto selecionada';
+                filenameEl.classList.add('text-gray-400');
+                filenameEl.classList.remove('text-emerald-400', 'font-bold');
+                btnTextEl.textContent = 'Escolher Foto';
+            }
+        }
+
+        /* ======================================================================
+           FUNÇÃO: ENVIAR FORMULÁRIO DE ORÇAMENTO PARA O WHATSAPP
+           Pega as informações preenchidas pelo usuário, monta a mensagem
+           e abre o aplicativo do WhatsApp com 1 clique.
+           ====================================================================== */
+        function sendWhatsAppQuote(e) {
+            e.preventDefault(); // Evita que a página seja recarregada
+            
+            // Leitura dos campos do formulário
+            const name = document.getElementById('quote-name').value.trim();
+            const car = document.getElementById('quote-car').value.trim();
+            const service = document.getElementById('quote-service').value.trim();
+            const urgency = document.getElementById('quote-urgency').value;
+            const desc = document.getElementById('quote-desc').value.trim();
+
+            // Montagem da mensagem formatada para o WhatsApp
+            let message = `Olá, Center Fix! Gostaria de solicitar um orçamento:\n\n` +
+                          `👤 *Nome:* ${name}\n` +
+                          `🚗 *Veículo:* ${car}\n` +
+                          `🔧 *Serviço/Peça:* ${service}\n` +
+                          `⏰ *Urgência:* ${urgency}\n` +
+                          `📝 *Descrição:* ${desc || 'Sem observações adicionais'}`;
+
+            // Adiciona aviso de foto caso o cliente tenha selecionado um ficheiro
+            if (selectedPhotoName) {
+                message += `\n\n📷 *Foto:* Selecionei a imagem (${selectedPhotoName}) para enviar aqui no chat.`;
+            }
+
+            // Gerador da URL e abertura direta do WhatsApp
+            const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
